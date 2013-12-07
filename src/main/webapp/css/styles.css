@@ -1,0 +1,62 @@
+html {
+  height: 100%
+}
+
+body {
+  background-color: #ff6655;
+  font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 50pt;
+  padding: 30px;
+  text-align: center;
+}
+
+textarea {
+  font-size: 20pt;
+  width: 100%;
+  resize: none;
+  border-radius: 10px;
+}
+
+div#content {
+  background-color: #ffeeee;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+div.code {
+  background-color: #ffffff;
+  font-size: 20pt;
+  width: 90%
+}
+
+div#output {
+  font-size: 20pt;
+  background-color: #ffffff;
+  width: 100%;
+  border-radius: 10px;
+}
+
+div#output p {
+  word-wrap: break-word
+}
+
+div.footer {
+  bottom:0;
+  width:100%;
+  background:#77bb66;
+  border-radius: 10px;
+}
+
+p#strap {
+  text-align: center;
+}
+
+#submit {
+  text-align: right;
+}
