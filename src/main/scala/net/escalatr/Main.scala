@@ -1,6 +1,10 @@
 package net.escalatr
 
-object Main extends App {
+import org.scalatra._
 
-  println("Yo!")
+class Main extends ScalatraFilter {
+
+  get("/") {
+    <h1>Hello, world!</h1>
+  }
 }
