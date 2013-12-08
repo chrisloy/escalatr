@@ -42,14 +42,22 @@ div#output {
   border-radius: 10px;
 }
 
+div#problem {
+  font-size: 20pt;
+  background-color: #ffffff;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
 div#output p {
   word-wrap: break-word
 }
 
 div.footer {
-  bottom:0;
-  width:100%;
-  background:#77bb66;
+  bottom: 0;
+  width: 100%;
+  background-color: #77bb66;
   border-radius: 10px;
 }
 
@@ -59,4 +67,10 @@ p#strap {
 
 #submit {
   text-align: right;
+}
+
+.wildcard {
+  background-color: #77bb66;
+  border-radius: 30px;
+  padding: 5px;
 }
