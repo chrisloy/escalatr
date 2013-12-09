@@ -1,7 +1,5 @@
 package net.escalatr
 
-import org.scalatra._
-import scalate.ScalateSupport
 import net.escalatr.interpreter.Interpreter
 import scala.util.{Failure, Success, Try}
 import scala.xml.{XML, Elem, NodeBuffer, Node}
@@ -11,35 +9,57 @@ class EscalatrServlet extends EscalatrStack {
   val interpret = new Interpreter
 
   get("/") {
-    template(scratchPad(""))
+    template(
+      scratchPad(""),
+      form("eval")
+    )
   }
 
-  get("/:id") {
+  get("/problem/:id") {
     val id = params("id").toInt
     val problem = Problem(id)
     template(
+      <h5>Problem {id}</h5>,
       XML loadString s"""<div id="problem">
         ${problem replaceAll ("\n", "<br/>") replace ("?", """<span class="wildcard">?</span>""")}
       </div>""",
       scratchPad(""),
-      form(("id", id.toString))
+      form(s"$id", ("id", id.toString))
+    )
+  }
+
+  post("/problem/:id") {
+    val code = params("code")
+    val id = params("id").toInt
+    val problem = Problem(id)
+    val exec =  problem replace ("?", s"{$code}")
+    val result = Try(interpret(exec).asInstanceOf[Boolean])
+    val div = result match {
+      case Success(true) => <div id="success">Success! Next: <a href={s"/problem/${id+1}"}>{id+1}</a></div>
+      case Success(false) => <div id="failure">Nope! Try again :-)</div>
+      case Failure(exception) => <div id="output"><p>{exception.getMessage}</p></div>
+    }
+    template(
+      <h2>problem {id}</h2>,
+      XML loadString s"""<div id="problem">
+        ${problem replaceAll ("\n", "<br/>") replace ("?", """<span class="wildcard">?</span>""")}
+      </div>""",
+      div,
+      scratchPad(code),
+      form(s"$id", ("id", id.toString))
     )
   }
 
   post("/eval") {
     val code = params("code")
-    val exec = params.get("id") match {
-      case Some(x) => Problem(x.toInt) replace ("?", s"{\n$code\n}")
-      case None => code
-    }
-    val result = Try(interpret(exec).toString)
+    val result = Try(interpret(code).toString)
     val (message, to) = result match {
       case Success(output) => (output, "... compiled to ...")
       case Failure(exception) => (exception.getMessage, "... didn't compile due to ...")
     }
     template(
-      scratchPad(exec),
-      form(),
+      scratchPad(code),
+      form("eval"),
       <p>{to}</p>,
       <div id="output"><p>{message}</p></div>
     )
@@ -54,11 +74,11 @@ class EscalatrServlet extends EscalatrStack {
   }
 
   private def scratchPad(text: String) = {
-    <textarea rows="10" cols="50" name="code" form="usrform">{text}</textarea>
+    <textarea rows="10" cols="50" name="code" form="form">{text}</textarea>
   }
 
-  private def form(hiddenParams: (String, String)*) = {
-    <form action="eval" id="usrform" method="post">
+  private def form(action: String, hiddenParams: (String, String)*) = {
+    <form action={action} id="form" method="post">
       <div id="submit"><input type="submit" value="Do it!"/></div>
       {
         for ((name, value) <- hiddenParams ) yield {
@@ -76,7 +96,9 @@ class EscalatrServlet extends EscalatrStack {
         <p id="strap">A fun place where learning about Scala can happen through your eyes and fingers</p>
         <div id="content">
           {body}
-          <div class="footer">About etc</div>
+          <div class="footer">
+            <a href="/problem/0">First problem</a>
+          </div>
         </div>
       </body>
     </html>
