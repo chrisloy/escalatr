@@ -48,6 +48,7 @@ class EscalatrServlet extends EscalatrStack {
   private val head = {
     <head>
       <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+      <script src="/js/google-code-prettify/run_prettify.js"></script>
       <title>escalatr</title>
     </head>
   }
