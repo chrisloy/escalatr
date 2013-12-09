@@ -20,9 +20,9 @@ class EscalatrServlet extends EscalatrStack {
     val problem = Problem(id)
     template(
       <h5>Problem {id}</h5>,
-      XML loadString s"""<div id="problem">
-        ${problem replaceAll ("\n", "<br/>") replace ("?", """<span class="wildcard">?</span>""")}
-      </div>""",
+      XML loadString s"""<pre id="problem" class="prettyprint lang-scala">
+        |${problem replaceAll ("\n", "<br/>") replace ("?", """<span class="wildcard">?</span>""")}
+      |</pre>""".stripMargin,
       scratchPad(""),
       form(s"$id", ("id", id.toString))
     )
@@ -41,9 +41,9 @@ class EscalatrServlet extends EscalatrStack {
     }
     template(
       <h2>problem {id}</h2>,
-      XML loadString s"""<div id="problem">
-        ${problem replaceAll ("\n", "<br/>") replace ("?", """<span class="wildcard">?</span>""")}
-      </div>""",
+      XML loadString s"""<pre id="problem" class="prettyprint lang-scala">
+        |${problem replaceAll ("\n", "<br/>") replace ("?", """<span class="wildcard">?</span>""")}
+      |</pre>""".stripMargin,
       div,
       scratchPad(code),
       form(s"$id", ("id", id.toString))

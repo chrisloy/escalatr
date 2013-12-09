@@ -20,11 +20,10 @@ textarea {
   border-radius: 10px;
 }
 
-div#content {
+#content {
   background-color: #ffeeee;
   max-width: 720px;
   margin: 0 auto;
-  text-align: center;
   padding: 20px;
   border-radius: 10px;
 }
@@ -42,7 +41,7 @@ div#output {
   border-radius: 10px;
 }
 
-div#problem {
+#problem {
   font-size: 20pt;
   background-color: #ffffff;
   width: 100%;
