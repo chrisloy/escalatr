@@ -55,9 +55,26 @@ div#output p {
 }
 
 div.footer {
+  font-size: 20pt;
   bottom: 0;
   width: 100%;
   background-color: #77bb66;
+  border-radius: 10px;
+}
+
+div#success {
+  font-size: 20pt;
+  bottom: 0;
+  width: 100%;
+  background-color: #55ff55;
+  border-radius: 10px;
+}
+
+div#failure {
+  font-size: 20pt;
+  bottom: 0;
+  width: 100%;
+  background-color: #ff55555;
   border-radius: 10px;
 }
 
