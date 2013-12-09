@@ -67,14 +67,17 @@ class EscalatrServlet extends EscalatrStack {
 
   private val head = {
     <head>
+      <link rel="stylesheet" type="text/css" href="/css/codemirror.css"/>
       <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
       <script src="/js/google-code-prettify/run_prettify.js"></script>
+      <script src="/js/codemirror.js"></script>
+      <script src="/js/clike.js"></script>
       <title>escalatr</title>
     </head>
   }
 
   private def scratchPad(text: String) = {
-    <textarea rows="10" cols="50" name="code" form="form">{text}</textarea>
+    <textarea rows="10" cols="50" id="scratchpad" name="code" form="form">{text}</textarea>
   }
 
   private def form(action: String, hiddenParams: (String, String)*) = {
@@ -96,6 +99,11 @@ class EscalatrServlet extends EscalatrStack {
         <p id="strap">A fun place where learning about Scala can happen through your eyes and fingers</p>
         <div id="content">
           {body}
+          <script>
+            var editor = CodeMirror.fromTextArea(document.getElementById('scratchpad'), {{
+              mode: 'text/x-scala'
+            }});
+          </script>
           <div class="footer">
             <a href="/problem/0">First problem</a>
           </div>
