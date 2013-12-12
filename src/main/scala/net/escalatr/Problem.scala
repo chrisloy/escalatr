@@ -1,25 +1,30 @@
 package net.escalatr
 
+import spray.json._
+
+case class Problem(id: Int, source: Seq[String], title: String, description: String, disallowedTerms: Seq[String]) {
+
+  def replaceAll(target: String, replacement: String) = source.head replaceAll (target, replacement)
+  def replace(target: String, replacement: String) = source.head replace (target, replacement)
+}
+
+object ProblemJsonProtocol extends DefaultJsonProtocol {
+
+  implicit val problemFormat = jsonFormat5(Problem.apply)
+}
+
 object Problem {
 
-  def apply(i: Int) = problems(i)
+  import ProblemJsonProtocol._
 
-  private val problems = Vector(
-    "? == 1 + 2 + 3",
+  val fileName = "/net/escalatr/problems.json"
 
-    """val x = 1 + 2
-      |6 == x + ?
-    """.stripMargin,
+  val problems: List[Problem] = {
+    val source = io.Source.fromInputStream(getClass.getResourceAsStream(fileName)).mkString.asJson
+    source.convertTo[List[Problem]]
+  }
 
-    "List(1, 2, ?) == 1 :: 2 :: 3 :: Nil",
+  def apply(i: Int) = get(i).get
 
-    "List(2, 4, 6) == (List(1, 2, 3) map (_ * ?))",
-
-    """def sq(x: Int) = x * x
-      |(List(1, 2, 3) map sq) == ?""".stripMargin,
-
-    """def countDown(x: Int): List[Int] = ?
-      |List(5, 4, 3, 2, 1) == countDown(5)""".stripMargin
-  )
-
+  def get(i: Int) = problems find (_.id == i)
 }
