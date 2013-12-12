@@ -19,4 +19,16 @@ class InterpreterSpec extends BaseSpec {
   it should "execute a string" in {
     interpret(""" "hello there" """) should be ("hello there")
   }
+
+  it should "reject references to Runtime" in intercept[IllegalAccessException]{
+    interpret("Runtime.getRuntime")
+  }
+
+  it should "reject references to System" in intercept[IllegalAccessException]{
+    interpret("java.lang.System.in")
+  }
+
+  it should "reject references to println" in intercept[IllegalAccessException]{
+    interpret("println(1234)")
+  }
 }
