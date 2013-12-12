@@ -3,16 +3,15 @@ package net.escalatr
 import net.escalatr.interpreter.Interpreter
 import scala.util.{Failure, Success, Try}
 import scala.xml.{XML, Elem, NodeBuffer, Node}
+import org.fusesource.scalate.mustache.MustacheParser
 
 class EscalatrServlet extends EscalatrStack {
 
   val interpret = new Interpreter
 
   get("/") {
-    template(
-      scratchPad(""),
-      form("eval")
-    )
+    contentType="text/html"
+    layoutTemplate("/WEB-INF/templates/layouts/test.mustache", "body" -> Seq(scratchPad(""), form("eval")))
   }
 
   get("/problem/:id") {
