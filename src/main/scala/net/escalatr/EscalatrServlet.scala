@@ -11,20 +11,22 @@ class EscalatrServlet extends EscalatrStack {
 
   get("/") {
     contentType="text/html"
-    layoutTemplate("/WEB-INF/templates/layouts/test.mustache", "body" -> Seq(scratchPad(""), form("eval")))
+    layoutTemplate("/WEB-INF/templates/layouts/main.mustache",
+      "action" -> "eval",
+      "hiddenParams" -> Map(),
+      "scratchpadText" -> "")
   }
 
   get("/problem/:id") {
     val id = params("id").toInt
     val problem = Problem(id)
-    template(
-      <h5>Problem {id}</h5>,
-      XML loadString s"""<pre id="problem" class="prettyprint lang-scala">
-        |${problem replaceAll ("\n", "<br/>") replace ("?", """<span class="wildcard">?</span>""")}
-      |</pre>""".stripMargin,
-      scratchPad(""),
-      form(s"$id", ("id", id.toString))
-    )
+    var problemHtml = problem replaceAll ("\n", "<br/>") replace ("?", "<span class=\"wildcard\">?</span>")
+    contentType="text/html"
+    layoutTemplate("/WEB-INF/templates/layouts/problem.mustache",
+      "id" -> id,
+      "problem" -> problemHtml,
+      "scratchpadText" -> "",
+      "hiddenParams" -> Map("id" -> id.toString))
   }
 
   post("/problem/:id") {
