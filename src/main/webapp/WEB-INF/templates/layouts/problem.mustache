@@ -1,18 +1,12 @@
 <html>
-<head>
-    <link rel="stylesheet" type="text/css" href="/css/codemirror.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
-    <script src="/js/google-code-prettify/run_prettify.js"></script>
-    <script src="/js/codemirror.js"></script>
-    <script src="/js/clike.js"></script>
-    <title>escalatr</title>
-</head>
+{{> head}}
 <body>
-    <h1><i>escalatr</i></h1>
-    <div id="content">
-        <h5>Problem {{id}}</h5>
-        <pre id="problem" class="prettyprint lang-scala">{{{problem}}}</pre>
-        <textarea rows="10" cols="50" id="scratchpad" name="code" form="form">{{scratchpadText}}</textarea>
-    </div>
+<h1><i>escalatr</i></h1>
+<div id="content">
+    <h5>Problem {{id}}</h5>
+    {{{result}}}
+    <pre id="problem" class="prettyprint lang-scala">{{{problem}}}</pre>
+    {{> scratchpad}}
+</div>
 </body>
 </html>
