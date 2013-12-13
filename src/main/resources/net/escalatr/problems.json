@@ -1,62 +1,53 @@
 [
   {
-    "id" : 1,
     "source" : ["? == 1 + 2 + 3"],
     "title" : "Superman IV: The Quest for Peace",
     "description" : "Kill the world right now!",
     "disallowedTerms" : []
   },
   {
-    "id" : 2,
     "source" : ["val x = 1 + 2\n6 == x + ?"],
     "title" : "Introduction to values",
     "description" : "The val keyword can be used to declare named immutable values",
     "disallowedTerms" : []
   },
   {
-    "id" : 3,
     "source" : ["List(1, 2, ?) == 1 :: 2 :: 3 :: Nil"],
     "title" : "Introduction to Lists",
     "description" : "There is more than one way to construct a List",
     "disallowedTerms" : []
   },
   {
-    "id" : 4,
     "source" : ["List(2, 4, 6) == (List(1, 2, 3) map (_ * ?))"],
     "title" : "The map function",
     "description" : "Calling map on a collection allows you to apply the same function to each of its members",
     "disallowedTerms" : []
   },
   {
-    "id" : 5,
     "source" : ["def sq(x: Int) = x * x\n(List(1, 2, 3) map sq) == ?"],
     "title" : "Declared functions",
     "description" : "The def keyword can be used to declare named functions",
     "disallowedTerms" : []
   },
   {
-    "id" : 6,
     "source" : ["def countDown(x: Int): List[Int] = ?\nList(5, 4, 3, 2, 1) == countDown(5)"],
     "title" : "Introduction to recursion",
     "description" : "Deeper down the rabbit hole...",
     "disallowedTerms" : []
   },
   {
-    "id" : 7,
     "source" : ["val s = \"cats and dogs\" match {\n  case \"\" => 1\n  case x if x contains \"mice\" => 2\n  case x => 3\n}\ns == ?"],
     "title" : "Introduction to pattern matching 1",
     "description" : "Pattern matching can be used to branch based on evaluated types",
     "disallowedTerms" : []
   },
   {
-    "id" : 8,
     "source" : ["val s = Option(1 :: 2 :: Nil) match {\n  case None => \"apples\"\n  case Some(Nil) => \"oranges\"\n  case Some(_: List[Int]) => \"pears\"\n}\ns == ?"],
     "title" : "Introduction to pattern matching 2",
     "description" : "Pattern matching can be done against any type",
     "disallowedTerms" : []
   },
   {
-    "id" : 9,
     "source" : ["val s = 1 :: 2 :: Nil match {\n  case Nil => 100\n  case head :: _ => head\n}\ns == ?"],
     "title" : "Introduction to pattern matching 2",
     "description" : "Pattern matching can be used to unpack objects",

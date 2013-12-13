@@ -35,7 +35,7 @@ class EscalatrServlet extends EscalatrStack {
   get("/problem/:id") {
     val id = params("id").toInt
     val problem = Problem(id)
-    var problemHtml = problem replaceAll ("\n", "<br/>") replace ("?", "<span class=\"wildcard\">?</span>")
+    val problemHtml = problem replaceAll ("\n", "<br/>") replace ("?", "<span class=\"wildcard\">?</span>")
     contentType="text/html"
     layoutTemplate("/WEB-INF/templates/layouts/problem.mustache",
       "id" -> id,
@@ -48,7 +48,7 @@ class EscalatrServlet extends EscalatrStack {
     val code = params("code")
     val id = params("id").toInt
     val problem = Problem(id)
-    var problemHtml = problem replaceAll ("\n", "<br/>") replace ("?", "<span class=\"wildcard\">?</span>")
+    val problemHtml = problem replaceAll ("\n", "<br/>") replace ("?", "<span class=\"wildcard\">?</span>")
     val exec =  problem replace ("?", s"{$code}")
     val result = Try(interpret(exec).asInstanceOf[Boolean])
     val div = result match {
