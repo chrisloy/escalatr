@@ -1,0 +1,7 @@
+<textarea rows="10" cols="50" id="scratchpad" name="code" form="form">{{scratchpadText}}</textarea>
+<form action={{action}} id="form" method="post">
+    <div id="submit"><input type="submit" value="Do it!"/></div>
+</form>
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById('scratchpad'), {mode: 'text/x-scala'});
+</script>
