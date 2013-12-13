@@ -40,5 +40,26 @@
     "title" : "Introduction to recursion",
     "description" : "Deeper down the rabbit hole...",
     "disallowedTerms" : []
+  },
+  {
+    "id" : 7,
+    "source" : ["val s = \"cats and dogs\" match {\n  case \"\" => 1\n  case x if x contains \"mice\" => 2\n  case x => 3\n}\ns == ?"],
+    "title" : "Introduction to pattern matching 1",
+    "description" : "Pattern matching can be used to branch based on evaluated types",
+    "disallowedTerms" : []
+  },
+  {
+    "id" : 8,
+    "source" : ["val s = Option(1 :: 2 :: Nil) match {\n  case None => \"apples\"\n  case Some(Nil) => \"oranges\"\n  case Some(_: List[Int]) => \"pears\"\n}\ns == ?"],
+    "title" : "Introduction to pattern matching 2",
+    "description" : "Pattern matching can be done against any type",
+    "disallowedTerms" : []
+  },
+  {
+    "id" : 9,
+    "source" : ["val s = 1 :: 2 :: Nil match {\n  case Nil => 100\n  case head :: _ => head\n}\ns == ?"],
+    "title" : "Introduction to pattern matching 2",
+    "description" : "Pattern matching can be used to unpack objects",
+    "disallowedTerms" : []
   }
 ]
